@@ -84,3 +84,15 @@ ggplot(data = warming_data, aes(x = year, y = damage_difference))+
   theme_bw()
 ```
 
+### d) difference in damages over time per ton of CO2
+
+```{r}
+warming_data$damage_diff_per_ton <-(warming_data$damage_difference/ 3.5e+10) 
+
+ggplot(data = warming_data, aes(x = year, y = damage_diff_per_ton))+
+  geom_point()+
+  theme_bw()
+```
+
+## 3. Social Cost of Carbon 
+
