@@ -60,10 +60,27 @@ ggplot(data = damages_data, aes(x = warming, y = damages))+
 
 warming_data$damage_baseline <- quadratic_function(warming_data$warming_baseline)
 
+ggplot(data = warming_data, aes(x = year, y = damage_baseline))+
+  geom_point()+
+  theme_bw()
+```
 
+### b) Damages over time with pulse
+```{r}
+# Use damages function to create a new column for warming data set
 warming_data$damage_pulse <- quadratic_function(warming_data$warming_pulse)
 
+ggplot(data = warming_data, aes(x = year, y = damage_pulse))+
+  geom_point()+
+  theme_bw()
+```
+
+### c) Difference in damages over time that arises from the pulse
+```{r}
 warming_data$damage_difference <-(warming_data$damage_pulse - warming_data$damage_baseline) 
 
+ggplot(data = warming_data, aes(x = year, y = damage_difference))+
+  geom_point()+
+  theme_bw()
 ```
 
