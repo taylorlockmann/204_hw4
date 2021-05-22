@@ -12,14 +12,17 @@ library(here)
 library(janitor)
 ```
 
+
+## 1. Estimate a quadratic function relating damages to temperature
+
 ```{r}
 damages_data <- read_csv(here("data", "damages.csv")) %>% clean_names()
 
 warming_data <- read_csv(here("data", "warming.csv")) %>% clean_names()
 
-ggplot(data = damages_data, aes(x = warming, y = damages))+
-  geom_point()+
-  theme_bw()
+#ggplot(data = damages_data, aes(x = warming, y = damages))+
+  #geom_point()+
+  #theme_bw()
 ```
 
 ```{r}
@@ -46,5 +49,13 @@ ggplot(data = damages_data, aes(x = warming, y = damages))+
   stat_function(fun = quadratic_function)+
   geom_point()+
   theme_bw()
+```
+
+## 2. Damages under baseline climate and pulse
+
+### a) Damages over time without pulse
+
+```{r}
+ggplot(data = )
 ```
 
