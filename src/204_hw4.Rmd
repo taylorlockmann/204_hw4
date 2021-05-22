@@ -96,3 +96,23 @@ ggplot(data = warming_data, aes(x = year, y = damage_diff_per_ton))+
 
 ## 3. Social Cost of Carbon 
 
+```{r}
+# Write a function for the social cost of carbon (SCC) according to discount rate
+scc <- function(r) warming_data$damage_diff_per_ton/((1+r)^warming_data$x1)
+
+# Make new columns of different discount rates
+warming_data$scc_1 <- scc(0.01)
+warming_data$scc_2 <- scc(0.02)
+warming_data$scc_3 <- scc(0.03)
+warming_data$scc_4 <- scc(0.04)
+warming_data$scc_5 <- scc(0.05)
+
+ggplot(data = warming_data, aes(x = year))+
+  geom_line(data = warming_data, aes(x = year, y = scc_1))+
+  geom_line(data = warming_data, aes(x = year, y = scc_2))+
+  geom_line(data = warming_data, aes(x = year, y = scc_3))+
+  geom_line(data = warming_data, aes(x = year, y = scc_4))+
+  geom_line(data = warming_data, aes(x = year, y = scc_5))+
+  theme_bw()
+```
+
