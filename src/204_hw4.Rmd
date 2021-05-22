@@ -31,3 +31,20 @@ quadratic_model <-lm(damages ~ warming + warming2, data = damages_data)
 summary(quadratic_model)
 ```
 
+```{r}
+# Name coefficients we got from the above step
+
+a <- quadratic_model$coefficients[[3]]
+b <- quadratic_model$coefficients[[2]]
+
+#Write quadratic function using a and b
+quadratic_function <- function(x) a*x^2 + b*x
+
+#plot(quadratic_function)
+
+ggplot(data = damages_data, aes(x = warming, y = damages))+
+  stat_function(fun = quadratic_function)+
+  geom_point()+
+  theme_bw()
+```
+
