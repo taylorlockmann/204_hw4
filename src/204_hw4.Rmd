@@ -22,3 +22,12 @@ ggplot(data = damages_data, aes(x = warming, y = damages))+
   theme_bw()
 ```
 
+```{r}
+#Make the x variable exponential 
+damages_data$warming2 <- damages_data$warming^2
+
+quadratic_model <-lm(damages ~ warming + warming2, data = damages_data)
+
+summary(quadratic_model)
+```
+
