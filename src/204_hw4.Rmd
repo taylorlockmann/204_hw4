@@ -106,14 +106,6 @@ warming_data$scc_2 <- scc(0.02)
 warming_data$scc_3 <- scc(0.03)
 warming_data$scc_4 <- scc(0.04)
 warming_data$scc_5 <- scc(0.05)
-
-ggplot(data = warming_data, aes(x = year))+
-  geom_line(data = warming_data, aes(x = year, y = scc_1))+
-  geom_line(data = warming_data, aes(x = year, y = scc_2))+
-  geom_line(data = warming_data, aes(x = year, y = scc_3))+
-  geom_line(data = warming_data, aes(x = year, y = scc_4))+
-  geom_line(data = warming_data, aes(x = year, y = scc_5))+
-  theme_bw()
 ```
 
 ```{r}
@@ -140,3 +132,37 @@ ggplot(data= scc_df, aes(x= r, y=damage_per_ton)) +
 
 ```
 
+
+## 4. Ramsey Rule SCC calculation
+
+```{r}
+# Function for Ramsey Rule
+ramsey_rule <- function(p, n, g) p + n*g
+
+# Find the SCC for our given values
+ramsey_rule(p = 0.001, n = 2, g = 0.01)
+```
+```{r}
+# Make new column in our warming data of this discount rate
+warming_data$scc_2.1 <- scc(0.021)
+# Find the sum of damages at this SCC
+scc_2.1_sum <- sum(warming_data$scc_2.1)
+
+#make vectors
+ramsey_damage_per_ton <- c(scc_1_sum,scc_2_sum, scc_2.1_sum, scc_3_sum, scc_4_sum, scc_5_sum )
+
+ramsey_r <- c(0.01, 0.02, 0.021, 0.03, 0.04, 0.05)
+ramsey_scc_df<- data.frame(ramsey_r,ramsey_damage_per_ton)
+
+# Plot this point on our graph from 4d
+ggplot(data= ramsey_scc_df, aes(x= ramsey_r, y=ramsey_damage_per_ton)) +
+  geom_point()+
+  geom_line()+
+  theme_bw()
+  
+```
+
+
+
+
+## 5. 
