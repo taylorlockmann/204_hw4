@@ -199,9 +199,20 @@ Expected present value of damages up to 2100 under Policy A is equal to $ `r exp
 ### Policy B
 
 ```{r}
-# make a warming column for policy B, where  warming will continue until 2050 as in the “baseline” dataset, and then will stabilize at 1.29 degrees
-# warming_data$base_b <- warming_data$warming_baseline %>% 
+# Make a warming column for policy B, where  warming will continue until 2050 as in the “baseline” dataset, and then will stabilize at 1.29 degrees
+warming_data$base_b <- ifelse(warming_data$year >= 2050, 1.29, warming_data$warming_baseline)
 
-# need to figure doing a when year >= 2050 then base_b = 1.29
+# Find damages associated with Policy B
+warming_data$damage_policyB <- quadratic_function(warming_data$base_b)
+
+#Find the present value of damages of Policy B
+warming_data$pv_damage_policyB <- warming_data$damage_policyB/((1+.02)^warming_data$x1)
+
+# Sum the present values 
+sum_pv_damage_policyB <- sum(warming_data$pv_damage_policyB)
+
+sum_pv_damage_policyB
 ```
+
+Expected present value of damages up to 2100 under Policy B is equal to $ `r sum_pv_damage_policyB`. 
 
