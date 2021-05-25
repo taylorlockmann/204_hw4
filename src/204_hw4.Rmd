@@ -166,12 +166,33 @@ ggplot(data= ramsey_scc_df, aes(x= ramsey_r, y=ramsey_damage_per_ton)) +
 
 
 ## 5. 
+### Policy A
 ```{r}
 #Find the present value of damages 
 warming_data$base_a <- warming_data$damage_baseline/((1+.02)^warming_data$x1)
 
+# Sum the present values 
 present_val_base_a_sum <- sum(warming_data$base_a)
 
-# add 1.5 degrees to warming values and rerun 
+# add X1.5 to warming values and rerun
+warming_data$warming_1.5_a <- 1.5*(warming_data$warming_baseline)
+
+# Find the damages of a warming change (1.5* baseline) using damages function
+warming_data$damage_1.5_a <- quadratic_function(warming_data$warming_1.5_a)
+
+#Find the present value of damages of 1.5 warming values
+warming_data$base_1.5_a <- warming_data$damage_1.5_a/((1+.02)^warming_data$x1)
+
+# Sum the present values 
+present_val_1.5_a_sum <- sum(warming_data$base_1.5_a)
+```
+
+### Policy B
+
+```{r}
+# make a warming column for policy B, where  warming will continue until 2050 as in the “baseline” dataset, and then will stabilize at 1.29 degrees
+# warming_data$base_b <- warming_data$warming_baseline %>% 
+
+# need to figure doing a when year >= 2050 then base_b = 1.29
 ```
 
