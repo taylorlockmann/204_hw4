@@ -132,6 +132,7 @@ ggplot(data= scc_df, aes(x= r, y=damage_per_ton)) +
 
 ```
 
+
 ## 4. Ramsey Rule SCC calculation
 
 ```{r}
@@ -164,6 +165,13 @@ ggplot(data= ramsey_scc_df, aes(x= ramsey_r, y=ramsey_damage_per_ton)) +
 
 
 
-
 ## 5. 
+```{r}
+#Find the present value of damages 
+warming_data$base_a <- warming_data$damage_baseline/((1+.02)^warming_data$x1)
+
+present_val_base_a_sum <- sum(warming_data$base_a)
+
+# add 1.5 degrees to warming values and rerun 
+```
 
