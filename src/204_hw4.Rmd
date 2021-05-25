@@ -134,9 +134,9 @@ r <- c(0.01, 0.02, 0.03, 0.04, 0.05)
 scc_df<- data.frame(r,damage_per_ton)
 
 ggplot(data= scc_df, aes(x= r, y=damage_per_ton)) +
-         geom_point()
-
-
+  geom_point()+
+  geom_line()+
+  theme_bw()
 
 ```
 
