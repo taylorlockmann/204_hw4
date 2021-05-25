@@ -185,7 +185,16 @@ warming_data$base_1.5_a <- warming_data$damage_1.5_a/((1+.02)^warming_data$x1)
 
 # Sum the present values 
 present_val_1.5_a_sum <- sum(warming_data$base_1.5_a)
+
+# Expected present value of damages under policy A
+expected_value <- function(p1, x1, p2, x2) p1*x1+p2*x2
+
+expected_policyA <- expected_value(0.5, present_val_base_a_sum, 0.5, present_val_1.5_a_sum)
+expected_policyA
 ```
+
+Expected present value of damages up to 2100 under Policy A is equal to $ `r expected_policyA`. 
+
 
 ### Policy B
 
