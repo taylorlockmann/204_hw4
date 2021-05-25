@@ -216,3 +216,4 @@ sum_pv_damage_policyB
 
 Expected present value of damages up to 2100 under Policy B is equal to $ `r sum_pv_damage_policyB`. 
 
+X could be equal to the summed present value of Policy A - the summed present value of Policy B, for it to still make economic sense to pursue Policy B over Policy A. If society were risk averse, 
