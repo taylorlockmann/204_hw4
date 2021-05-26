@@ -1,7 +1,7 @@
 ---
 title: "ESM204 Homework 4 - Social Cost of Carbon"
 author: "Nick Bissonnette, Taylor Lockmann, Laurel Wee"
-date: "5/22/2021"
+date: "5/26/2021"
 output: pdf_document
 ---
 
@@ -55,7 +55,7 @@ ggplot(data = damages_data, aes(x = warming, y = damages))+
     title = "Total Damages from Global Warming"
   )
 ```
-The quadratic damage function is y= 1.959e+13*x^2 -3.019e+12*x.
+The quadratic damage function is y= `r a `*x^2 `r b `*x.
 
 
 ## 2. Damages under baseline climate and pulse
@@ -69,7 +69,11 @@ warming_data$damage_baseline <- quadratic_function(warming_data$warming_baseline
 
 ggplot(data = warming_data, aes(x = year, y = damage_baseline))+
   geom_point()+
-  theme_bw()
+  theme_bw()+
+  labs(
+    y = "Damages ($)",
+    x = "Year",
+    title = "Baseline Damages Over Time")
 ```
 
 ### b) Damages over time with pulse
@@ -79,7 +83,11 @@ warming_data$damage_pulse <- quadratic_function(warming_data$warming_pulse)
 
 ggplot(data = warming_data, aes(x = year, y = damage_pulse))+
   geom_point()+
-  theme_bw()
+  theme_bw()+
+  labs(
+    y = "Damages ($)",
+    x = "Year",
+    title = "Damages Over Time with Pulse")
 ```
 
 ### c) Difference in damages over time that arises from the pulse
@@ -88,7 +96,11 @@ warming_data$damage_difference <-(warming_data$damage_pulse - warming_data$damag
 
 ggplot(data = warming_data, aes(x = year, y = damage_difference))+
   geom_point()+
-  theme_bw()
+  theme_bw()+
+  labs(
+    y = "Damages ($)",
+    x = "Year",
+    title = "Difference Between Pulse and Baseline Damages")
 ```
 
 ### d) difference in damages over time per ton of CO2
@@ -98,7 +110,11 @@ warming_data$damage_diff_per_ton <-(warming_data$damage_difference/ 3.5e+10)
 
 ggplot(data = warming_data, aes(x = year, y = damage_diff_per_ton))+
   geom_point()+
-  theme_bw()
+  theme_bw()+
+  labs(
+    y = "Damages per Ton CO2 ($)",
+    x = "Year",
+    title = "Per Ton Damage Difference Between Pulse and Baseline")
 ```
 
 ## 3. Social Cost of Carbon 
@@ -135,7 +151,11 @@ scc_df<- data.frame(r,damage_per_ton)
 ggplot(data= scc_df, aes(x= r, y=damage_per_ton)) +
   geom_point()+
   geom_line()+
-  theme_bw()
+  theme_bw()+
+  labs(
+    y = "SCC per ton ($)",
+    x = "Discount Rate",
+    title = "Social Cost of Carbon Against Discount Rates 1%- 5% ")
 
 ```
 
@@ -149,6 +169,7 @@ ramsey_rule <- function(p, n, g) p + n*g
 # Find the SCC for our given values
 ramsey_rule(p = 0.001, n = 2, g = 0.01)
 ```
+Using the Ramsey Rule, we found the discount rule should be 2.1%. 
 ```{r}
 # Make new column in our warming data of this discount rate
 warming_data$scc_2.1 <- scc(0.021)
@@ -165,7 +186,12 @@ ramsey_scc_df<- data.frame(ramsey_r,ramsey_damage_per_ton)
 ggplot(data= ramsey_scc_df, aes(x= ramsey_r, y=ramsey_damage_per_ton)) +
   geom_point()+
   geom_line()+
-  theme_bw()
+  theme_bw()+
+  labs(
+    y = "SCC per ton ($)",
+    x = "Discount Rate",
+    title = "Social Cost of Carbon Against Discount Rates ")+
+  annotate("text", x = .021, y = 70.37, color = " purple", label = "Discount Rate of 2.1%")
   
 ```
 
@@ -223,8 +249,8 @@ sum_pv_damage_policyB
 
 Expected present value of damages up to 2100 under Policy B is equal to $ `r sum_pv_damage_policyB`. 
 
-With society being risk neutral, X could be equal to the summed present value of Policy A - the summed present value of Policy B, for it to still make economic sense to pursue Policy B over Policy A. After that point, society would be more likely to pursue Policy A as it would be economically more affordable.  
+With society being risk neutral, X could be equal to the summed present value of Policy A subtracted by the summed present value of Policy B, for it to still make economic sense to pursue Policy B over Policy A. After that point, society would be more likely to pursue Policy A as it would be economically more affordable.  
 
-Under Policy A society would be unsure what will actually happen in the future, so if society were risk averse and the costs of the two policies were essentially the same, society would be more likely to choose to pursue Policy B due to its perceived safety. 
+Under Policy A, society would have more risk associated with potential outcome. If society is risk averse and the costs of the two policies were the same, society would be more likely to choose to pursue Policy B due to the higher utility society gains. 
 
 
