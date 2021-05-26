@@ -48,8 +48,15 @@ quadratic_function <- function(x) a*x^2 + b*x
 ggplot(data = damages_data, aes(x = warming, y = damages))+
   stat_function(fun = quadratic_function)+
   geom_point()+
-  theme_bw()
+  theme_bw()+
+  labs(
+    y = "Damages ($)",
+    x = "Tempurature (C)",
+    title = "Total Damages from Global Warming"
+  )
 ```
+The quadratic damage function is y= 1.959e+13*x^2 -3.019e+12*x.
+
 
 ## 2. Damages under baseline climate and pulse
 
