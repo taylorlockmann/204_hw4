@@ -103,7 +103,7 @@ ggplot(data = warming_data, aes(x = year, y = damage_difference))+
     title = "Difference Between Pulse and Baseline Damages")
 ```
 
-### d) difference in damages over time per ton of CO2
+### d) Difference in damages over time per ton of CO2
 
 ```{r}
 warming_data$damage_diff_per_ton <-(warming_data$damage_difference/ 3.5e+10) 
@@ -199,7 +199,8 @@ ggplot(data= ramsey_scc_df, aes(x= ramsey_r, y=ramsey_damage_per_ton)) +
 
 
 
-## 5. 
+## 5. Possible Climate Policies
+
 ### Policy A
 ```{r}
 #Find the present value of damages 
