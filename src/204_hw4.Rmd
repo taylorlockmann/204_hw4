@@ -191,7 +191,8 @@ ggplot(data= ramsey_scc_df, aes(x= ramsey_r, y=ramsey_damage_per_ton)) +
     y = "SCC per ton ($)",
     x = "Discount Rate",
     title = "Social Cost of Carbon Against Discount Rates ")+
-  annotate("text", x = .021, y = 70.37, color = " purple", label = "Discount Rate of 2.1%")
+  annotate("text", x = 0.0285, y = 69, color = " purple", label = "Discount Rate of 2.1%")+
+  geom_point(aes(x = 0.021, y = 68.37845), color = "purple")
   
 ```
 
